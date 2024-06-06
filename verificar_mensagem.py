@@ -8,16 +8,17 @@ def gerar_botoes():
     ]
     return botoes
 
-def verificar_mensagem(mensagem):
+def verificar_mensagem(mensagem, afiate_code):
     codigo = None
     if "shareCode=" in mensagem:
         codigo = mensagem.split("shareCode=")[1]
         mensagem = mensagem.split("https://")[0]  # Remover link da mensagem
 
     if codigo:
-        resposta = "Escolha um destino:"
-        botoes = gerar_botoes()
-        return codigo,resposta, botoes
+        resposta = f"https://go.aff.estrelabetpartners.com/{afiate_code}?aposta={codigo}"
+        # botoes = gerar_botoes()
+        return codigo,resposta, None
+    
     elif mensagem == "Tchau":
         resposta = "Tchau, até mais!"
         return None, resposta, None
