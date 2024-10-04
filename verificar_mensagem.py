@@ -15,7 +15,7 @@ def verificar_mensagem(mensagem, afiliate_code):
         mensagem = mensagem.split("https://")[0]  # Remover link da mensagem
 
     if codigo:
-        resposta = f"https://go.aff.bet.bet/{afiliate_code}?bt=path{codigo}"
+        resposta = f"https://go.aff.bet.bet/{afiliate_code}?bt-path={codigo}"
         # botoes = gerar_botoes()
         return codigo,resposta, None
     
