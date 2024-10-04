@@ -1,5 +1,5 @@
 # Use a imagem base do Python
-FROM python:3.12
+FROM python:3.12-alpine
 
 # Definindo o diretório de trabalho dentro do contêiner
 WORKDIR /app
@@ -7,8 +7,10 @@ WORKDIR /app
 # Copiando o arquivo de requisitos para o contêiner
 COPY requirements.txt .
 
-RUN apt-get update && apt-get install -y
+RUN apk update && \
+    apk add --no-cache tzdata
 
+ENV TZ=America/Sao_Paulo
 # Instalando as dependências da aplicação
 RUN pip install -r requirements.txt
 
