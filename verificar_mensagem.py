@@ -1,40 +1,18 @@
-def gerar_botoes():
-    botoes = [
-        ["MONTE SEU BILHETE", "CANAL INSTA"],
-        ["STORYS", "FUTEBOL FREE"],
-        ["FUTEBOL VIP", "ODDS ALTAS"],
-        ["NBA FREE", "NBA VIP"],
-        ["YOUTUBE"]
-    ]
-    return botoes
-
 def verificar_mensagem(mensagem):
-    codigo = None
+    """
+    Verifica se a mensagem contém o código de aposta e retorna a resposta adequada.
+    """
+    codigo_aposta = None
+
+    # Verificar se há um código de aposta no link
     if "shareCode=" in mensagem:
-        codigo = mensagem.split("shareCode=")[1]
-        mensagem = mensagem.split("https://")[0]  # Remover link da mensagem
+        codigo_aposta = mensagem.split("shareCode=")[1].split("&")[0]  # Extrair apenas o código
+        resposta = "Código de aposta recebido! Agora, por favor, envie o código de afiliado."
+        return codigo_aposta, resposta
 
-    if codigo:
-        resposta = "Escolha um destino:"
-        botoes = gerar_botoes()
-        return codigo,resposta, botoes
-    elif mensagem == "Tchau":
-        resposta = "Tchau, até mais!"
-        return None, resposta, None
-    else:
-        resposta = "Por favor, compartilhe o link com o código da aposta."
-        return None, resposta, None
+    # Respostas padrões para mensagens inválidas
+    if mensagem.lower() == "tchau":
+        return None, "Tchau, até mais!"
+    
+    return None, "Por favor, compartilhe o link contendo o código de aposta."
 
-def obter_resposta_botao(botao):
-    respostas = {
-        "MONTE SEU BILHETE": "Você escolheu MONTE SEU BILHETE.",
-        "CANAL INSTA": "Você escolheu CANAL INSTA.",
-        "STORYS": "Você escolheu STORYS.",
-        "FUTEBOL FREE": "Você escolheu FUTEBOL FREE.",
-        "FUTEBOL VIP": "Você escolheu FUTEBOL VIP.",
-        "ODDS ALTAS": "Você escolheu ODDS ALTAS.",
-        "NBA FREE": "Você escolheu NBA FREE.",
-        "NBA VIP": "Você escolheu NBA VIP.",
-        "YOUTUBE": "Você escolheu YOUTUBE."
-    }
-    return respostas.get(botao, "Opção inválida.")
