@@ -7,7 +7,7 @@ def verificar_mensagem(mensagem):
     # Verificar se há um código de aposta no link
     if "shareCode=" in mensagem:
         codigo_aposta = mensagem.split("shareCode=")[1].split("&")[0]  # Extrair apenas o código
-        resposta = "Código de aposta recebido! Agora, por favor, envie o código de afiliado."
+        resposta = "Código de aposta recebido! Agora, por favor, envie o link contendo o código de afiliado."
         return codigo_aposta, resposta
 
     # Respostas padrões para mensagens inválidas

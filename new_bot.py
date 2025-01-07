@@ -23,7 +23,7 @@ except Exception as e:
 def obter_destino(mensagem, codigo_aposta):
     try:
         # Obter o código de afiliado enviado pelo cliente
-        codigo_afiliado = mensagem.text.strip()
+        codigo_afiliado = mensagem.text.split(".bet/")[1]
 
         # Montar o link no formato desejado
         base_url = "https://go.aff.mcgames.bet/"
