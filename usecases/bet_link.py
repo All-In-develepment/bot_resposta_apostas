@@ -19,7 +19,7 @@ class BetLink:
         
         base_url = "https://go.aff.mcgames.bet/"
 
-        codigo_aposta = url.split("shareCode=")[1].split("&")[0]  # Extrair apenas o código
+        codigo_aposta = url.split("bscode=")[1] # Extrair apenas o código
         link = f"{base_url}{afiliate_code}?shareCode={codigo_aposta}"
 
         return link
