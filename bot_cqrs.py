@@ -2,48 +2,39 @@ import os
 from dotenv import load_dotenv
 import telebot
 import time
+import Services.user_services as UserService
+import Services.message_services as MensagemService
 
-# Carregar as variáveis de ambiente do arquivo .env
+# Load environment variables from .env file
 load_dotenv()
 
-# Obter o token do bot das variáveis de ambiente
+# Get the bot token from the environment variables
 token = os.getenv("TELEGRAM_BOT_TOKEN")
 
-# Criar um objeto Bot
+# Create a Bot object
 bot = telebot.TeleBot(token)
 
-class MensagemService:
-    """ Serviço responsável por processar mensagens recebidas no bot. """
+codigos_afiliados = {}
+@bot.message_handler(commands=['CadastrarLinkSuperBet'])
+def solicitar_codigo(message):
+    bot.send_message(message.chat.id, "Por favor, envie o código de afiliado:")
+    
+    bot.register_next_step_handler(message, salvar_codigo)
 
-    @staticmethod
-    def processar_mensagem(mensagem):
-        """ Determina o tipo de mensagem e gera uma resposta adequada. """
-        if "betnacional.bet" in mensagem.text:
-            return MensagemService._processar_betnacional(mensagem.text), "BetNacional"
+# Lista de comandos disponíveis
+comandos = {
+    "/CadastrarLinkSuperBet": "Cadastrar um código de afiliado",
+    "/help": "Exibir todos os comandos disponíveis",
+    "/comandos": "Exibir todos os comandos disponíveis"
+}
 
-        if "superbet.bet.br/" in mensagem.text:
-            return MensagemService._processar_superbet(mensagem.text), "SuperBet"
-
-        return None  # Retorna None caso a mensagem não seja relevante
-
-    @staticmethod
-    def _processar_betnacional(texto):
-        """ Processa links da betnacional e retorna a resposta formatada. """
-        try:
-            bet_code = texto.split("betslip=")[1]
-            codigo_de_afiliado = "EsseAquiÉoSeuCodigoDeAfiliado"
-            return f"https://record.betnacional.bet.br/{codigo_de_afiliado}/1/share?betslip={bet_code}"
-        except IndexError:
-            return "Erro ao processar o link da BetNacional."
-
-    @staticmethod
-    def _processar_superbet(texto):
-        """ Processa links da SuperBet e retorna a resposta formatada. """
-        try:
-            bet_code = 'btag=a_5602b_378c_&affid=662&siteid=5602&adid=378&c=nalandageral&asclurl='
-            return f"https://wlsuperbet.adsrv.eacdn.com/C.ashx?{bet_code}={texto}"
-        except IndexError:
-            return "Erro ao processar o link da SuperBet."
+# Comando para exibir a lista de comandos
+@bot.message_handler(commands=['help', 'comandos'])
+def listar_comandos(message):
+    resposta = "🤖 Comandos disponíveis:\n"
+    for comando, descricao in comandos.items():
+        resposta += f"{comando} - {descricao}\n"
+    bot.send_message(message.chat.id, resposta)
 
 class MensagemHandler:
     """ Handler responsável por interagir com o bot e responder às mensagens. """
@@ -52,12 +43,31 @@ class MensagemHandler:
     @bot.message_handler(func=lambda message: True)
     def handle_message(mensagem):
         """ Recebe mensagens e responde caso seja necessário. """
-        resposta, casa = MensagemService.processar_mensagem(mensagem)
-        if resposta:
-            bot.send_message(mensagem.chat.id, resposta)
-            time_now = time.strftime("%d/%m/%Y %H:%M:%S")
-            print(f"[{time_now}] - Respondi para {mensagem.from_user.username}: {casa}")
+        user = mensagem.from_user.username
+        userName = UserService.UserService.get_user(user)
+        if (userName == None):
+            bot.send_message(mensagem.chat.id, """Não encontri seu cadastro.\n
+Digite /CadastrarLinkSuperBet para cadastrar seu codigo de afiliado da SuperBet.\n
+ou /CadastrarLinkBetNacional para cadastrar seu codigo de afiliado da BetNacional.""")
 
+
+        if (userName != None):
+            bot.send_message(mensagem.chat.id, "Olá, tudo bem?")
+        
+        if ("http://" in mensagem.text or "https://" in mensagem.text):
+            resposta, casa = MensagemService.MensagemService.processar_mensagem(mensagem)
+            if resposta:
+                bot.send_message(mensagem.chat.id, resposta)
+                time_now = time.strftime("%d/%m/%Y %H:%M:%S")
+                print(f"[{time_now}] - Respondi para {mensagem.from_user.username}: {casa}")
+        else:
+            bot.send_message(mensagem.chat.id, "Por favor, envie um link válido.")
+
+def salvar_codigo(message):
+    user_id = message.from_user.id
+    codigos_afiliados[user_id] = message.text
+    bot.send_message(message.chat.id, f"Código de afiliado {message.text} salvo com sucesso!")
+    
 # Iniciar o bot
 if __name__ == "__main__":
     bot.polling()
