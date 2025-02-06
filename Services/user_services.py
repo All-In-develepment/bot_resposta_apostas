@@ -13,7 +13,7 @@ class UserService:
     def get_user(username):
         endpoint = f"{base_url}/TelegramUser/{username}"
         response = requests.get(endpoint)
-        UserService.register_user(username)
+        # UserService.register_user(username)
         if response.status_code == 200:
             return response.json()
         return None

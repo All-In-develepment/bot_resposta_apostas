@@ -2,8 +2,9 @@ import os
 from dotenv import load_dotenv
 import telebot
 import time
-import Services.user_services as UserService
+from Services.user_services import UserService
 import Services.message_services as MensagemService
+from Services.betting_house import BettingHouse
 
 # Load environment variables from .env file
 load_dotenv()
@@ -19,11 +20,18 @@ codigos_afiliados = {}
 def solicitar_codigo(message):
     bot.send_message(message.chat.id, "Por favor, envie o código de afiliado:")
     
-    bot.register_next_step_handler(message, salvar_codigo)
+    bot.register_next_step_handler(message, salvar_codigo, "SuperBet")
+    
+@bot.message_handler(commands=['CadastrarLinkBetNacional'])
+def solicitar_codigo_bet_nascional(message):
+    bot.send_message(message.chat.id, "Por favor, envie o código de afiliado:")
+    
+    bot.register_next_step_handler(message, salvar_codigo, "BetNacional")
 
 # Lista de comandos disponíveis
 comandos = {
     "/CadastrarLinkSuperBet": "Cadastrar um código de afiliado",
+    "/CadastrarLinkBetNacional": "Cadastrar um código de afiliado",
     "/help": "Exibir todos os comandos disponíveis",
     "/comandos": "Exibir todos os comandos disponíveis"
 }
@@ -44,8 +52,9 @@ class MensagemHandler:
     def handle_message(mensagem):
         """ Recebe mensagens e responde caso seja necessário. """
         user = mensagem.from_user.username
-        userName = UserService.UserService.get_user(user)
+        userName = UserService.get_user(user)
         if (userName == None):
+            UserService.register_user(user)
             bot.send_message(mensagem.chat.id, """Não encontri seu cadastro.\n
 Digite /CadastrarLinkSuperBet para cadastrar seu codigo de afiliado da SuperBet.\n
 ou /CadastrarLinkBetNacional para cadastrar seu codigo de afiliado da BetNacional.""")
@@ -63,9 +72,15 @@ ou /CadastrarLinkBetNacional para cadastrar seu codigo de afiliado da BetNaciona
         else:
             bot.send_message(mensagem.chat.id, "Por favor, envie um link válido.")
 
-def salvar_codigo(message):
+def salvar_codigo(message, betting_house):
     user_id = message.from_user.id
     codigos_afiliados[user_id] = message.text
+    print(betting_house)
+    if betting_house == "SuperBet":
+        BettingHouse.register_link_superbet(message.text, message.from_user.username)
+    
+    if betting_house == "BetNacional":
+        BettingHouse.register_link_betnascinal(message.text, message.from_user.username)
     bot.send_message(message.chat.id, f"Código de afiliado {message.text} salvo com sucesso!")
     
 # Iniciar o bot
