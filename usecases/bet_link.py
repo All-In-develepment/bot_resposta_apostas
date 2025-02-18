@@ -1,3 +1,4 @@
+import requests
 from dotenv import load_dotenv
 import os
 
@@ -21,6 +22,11 @@ class BetLink:
         codigo_aposta = url.split("bscode=")[1] # Extrair apenas o código
         # https://mcgames.bet.br/sports?bscode=CODIGOBILHETE&utm_source=IDAFILIADO
         link = f"{base_url}{codigo_aposta}&utm_source={afiliate_code}"
-        # link = f"{base_url}{afiliate_code}?shareCode={codigo_aposta}"
-
         return link
+        # link = f"{base_url}{afiliate_code}?shareCode={codigo_aposta}"
+    
+    def SportingBetLink(self, url: str) -> str:
+        afiliate_code = os.getenv("AFILIATE_CODE_SPORTING_BET")
+        base_url = 'https://www.redirectcheck.org/api/check?url='
+        final_url = requests.get(base_url + url).json()['data']['redirects'][0]['to']
+        return f"{final_url}&wm={afiliate_code}"

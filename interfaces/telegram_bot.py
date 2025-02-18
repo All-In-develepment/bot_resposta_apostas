@@ -34,5 +34,10 @@ class TelegramBot:
             # Gera aposta da McGames
             msg_replay = self.bet_link.McGamesLink(user_message)
             await update.message.reply_text(f"{msg_replay}")
+        
+        if domain == "SportingBet":
+            # Gera aposta da SportingBet
+            msg_replay = self.bet_link.SportingBetLink(user_message)
+            await update.message.reply_text(f"{msg_replay}")
 
         await update.message.reply_text(f"{domain}")
