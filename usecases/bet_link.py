@@ -33,9 +33,10 @@ class BetLink:
         afiliate_code = os.getenv("AFILIATE_CODE_MCGAMES")
         
         base_url = "https://mcgames.bet.br/sports?bscode="
-        codigo_aposta = url.split("bscode=")[1] # Extrair apenas o código
+        codigo_aposta = url.split("shareCode=")[1] # Extrair apenas o código
         # https://mcgames.bet.br/sports?bscode=CODIGOBILHETE&utm_source=IDAFILIADO
-        link = f"{base_url}{codigo_aposta}&utm_source={afiliate_code}"
+        # link = f"{base_url}{codigo_aposta}&utm_source={afiliate_code}"
+        link = f"https://go.aff.mcgames.bet/{afiliate_code}?shareCode={codigo_aposta}"
         return link
         # link = f"{base_url}{afiliate_code}?shareCode={codigo_aposta}"
     
