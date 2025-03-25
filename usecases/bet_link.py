@@ -6,7 +6,8 @@ import os
 load_dotenv()
 
 class BetLink:
-    def EstrelaBetLink(self, url: str, selected_option) -> str:
+    # def EstrelaBetLink(self, url: str, selected_option) -> str:
+    def EstrelaBetLink(self, url: str) -> str:
         afiliate_code = os.getenv("AFILIATE_CODE_ESTRELA_BET")
 
         codigo = url.split("shareCode=")[1]
