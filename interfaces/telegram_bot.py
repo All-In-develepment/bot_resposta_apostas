@@ -35,15 +35,15 @@ class TelegramBot:
         if domain == "EstrelaBet":
             # Gera aposta da EstrelaBet
             # Gera botões para escolher a plataforma
-            options = ["INSTAGRAM / STORY", "INSTAGRAM / REELS", "TELEGRAM", "WHATSAPP", "TRAFEGO PAGO", "DISPARO", "YOUTUBE"]
-            reply_markup = self.create_buttons(options)
-            await update.message.reply_text("Choose an option:", reply_markup=reply_markup)
+            # options = ["INSTAGRAM / STORY", "INSTAGRAM / REELS", "TELEGRAM", "WHATSAPP", "TRAFEGO PAGO", "DISPARO", "YOUTUBE"]
+            # reply_markup = self.create_buttons(options)
+            # await update.message.reply_text("Choose an option:", reply_markup=reply_markup)
             
             # Salva a mensagem original no contexto do usuário
-            context.user_data["last_message"] = user_message
+            # context.user_data["last_message"] = user_message
             
-            # msg_replay = self.bet_link.EstrelaBetLink(user_message)
-            # await update.message.reply_text(f"{msg_replay}")
+            msg_replay = self.bet_link.EstrelaBetLink(user_message)
+            await update.message.reply_text(f"{msg_replay}")
         
         if domain == "McGames":
             # Gera aposta da McGames
@@ -53,6 +53,11 @@ class TelegramBot:
         if domain == "SportingBet":
             # Gera aposta da SportingBet
             msg_replay = self.bet_link.SportingBetLink(user_message)
+            await update.message.reply_text(f"{msg_replay}")
+        
+        if domain == "Lotogreen":
+            # Gera aposta da Lotogreen
+            msg_replay = self.bet_link.LotoGreenLink(user_message)
             await update.message.reply_text(f"{msg_replay}")
 
         # await update.message.reply_text(f"{domain}")

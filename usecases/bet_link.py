@@ -50,3 +50,13 @@ class BetLink:
             return "Houve um erro ao gerar o link, tente novamente mais tarde"
         
         return f"{final_url['redirectedUrl']}&wm={afiliate_code}"
+    
+    def LotoGreenLink(self, url: str) -> str:
+        afiliate_code = os.getenv("AFILIATE_CODE_LOTO_GREEN")
+        
+        codigo_aposta = url.split("shareCode=")[1]
+        
+        # https://go.aff.lotogreen.com/qsp19ap9?shareCode=JNUT8BTXYW
+        link = f"https://go.aff.lotogreen.com/{afiliate_code}?shareCode={codigo_aposta}"
+        
+        return link
