@@ -28,7 +28,7 @@ class BetLink:
         #     link = f"https://go.aff.estrelabetpartners.com/7hfp3csf?utm_term=disparo?&aposta={codigo}"
         # elif selected_option == "YOUTUBE":
         #     link = f"https://go.aff.estrelabetpartners.com/7hfp3csf?utm_term=yt?&aposta={codigo}"
-        # return link
+        return link
     
     def McGamesLink(self, url: str) -> str:
         afiliate_code = os.getenv("AFILIATE_CODE_MCGAMES")
