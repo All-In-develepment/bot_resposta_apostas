@@ -11,23 +11,23 @@ class BetLink:
 
         codigo = url.split("shareCode=")[1]
 
-        # link = f"https://go.aff.estrelabetpartners.com/{afiliate_code}?&aposta={codigo}"
-        link = ""
-        if selected_option == "INSTAGRAM / STORY":
-            link = f"https://go.aff.estrelabetpartners.com/7hfp3csf?utm_term=instagram&utm_term=story?&aposta={codigo}"
-        elif selected_option == "INSTAGRAM / REELS":
-            link = f"https://go.aff.estrelabetpartners.com/7hfp3csf?utm_term=instagram&utm_term=reels?&aposta={codigo}"
-        elif selected_option == "TELEGRAM":
-            link = f"https://go.aff.estrelabetpartners.com/7hfp3csf?utm_term=telegram?&aposta={codigo}"
-        elif selected_option == "WHATSAPP":
-            link = f"https://go.aff.estrelabetpartners.com/7hfp3csf?utm_term=whatsapp?&aposta={codigo}"
-        elif selected_option == "TRAFEGO PAGO":
-            link = f"https://go.aff.estrelabetpartners.com/7hfp3csf?utm_term=tp?&aposta={codigo}"
-        elif selected_option == "DISPARO":
-            link = f"https://go.aff.estrelabetpartners.com/7hfp3csf?utm_term=disparo?&aposta={codigo}"
-        elif selected_option == "YOUTUBE":
-            link = f"https://go.aff.estrelabetpartners.com/7hfp3csf?utm_term=yt?&aposta={codigo}"
-        return link
+        link = f"https://go.aff.estrelabetpartners.com/{afiliate_code}?&aposta={codigo}"
+        # link = ""
+        # if selected_option == "INSTAGRAM / STORY":
+        #     link = f"https://go.aff.estrelabetpartners.com/7hfp3csf?utm_term=instagram&utm_term=story?&aposta={codigo}"
+        # elif selected_option == "INSTAGRAM / REELS":
+        #     link = f"https://go.aff.estrelabetpartners.com/7hfp3csf?utm_term=instagram&utm_term=reels?&aposta={codigo}"
+        # elif selected_option == "TELEGRAM":
+        #     link = f"https://go.aff.estrelabetpartners.com/7hfp3csf?utm_term=telegram?&aposta={codigo}"
+        # elif selected_option == "WHATSAPP":
+        #     link = f"https://go.aff.estrelabetpartners.com/7hfp3csf?utm_term=whatsapp?&aposta={codigo}"
+        # elif selected_option == "TRAFEGO PAGO":
+        #     link = f"https://go.aff.estrelabetpartners.com/7hfp3csf?utm_term=tp?&aposta={codigo}"
+        # elif selected_option == "DISPARO":
+        #     link = f"https://go.aff.estrelabetpartners.com/7hfp3csf?utm_term=disparo?&aposta={codigo}"
+        # elif selected_option == "YOUTUBE":
+        #     link = f"https://go.aff.estrelabetpartners.com/7hfp3csf?utm_term=yt?&aposta={codigo}"
+        # return link
     
     def McGamesLink(self, url: str) -> str:
         afiliate_code = os.getenv("AFILIATE_CODE_MCGAMES")
