@@ -13,5 +13,8 @@ class IdentifyBetting:
 
         if "lotogreen" in url:
             return "Lotogreen"
+        
+        if "esportiva.bet" in url:
+            return "EsportivaBet"
 
         return "casa indefinida"

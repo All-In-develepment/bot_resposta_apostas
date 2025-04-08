@@ -59,6 +59,11 @@ class TelegramBot:
             # Gera aposta da Lotogreen
             msg_replay = self.bet_link.LotoGreenLink(user_message)
             await update.message.reply_text(f"{msg_replay}")
+        
+        if domain == "EsportivaBet":
+            # Gera aposta da EsportivaBet
+            msg_replay = self.bet_link.EsportivaBetLink(user_message)
+            await update.message.reply_text(f"{msg_replay}")
 
         # await update.message.reply_text(f"{domain}")
 

@@ -57,3 +57,13 @@ class BetLink:
         link = f"https://go.aff.lotogreen.com/{afiliate_code}?shareCode={codigo_aposta}"
         
         return link
+    
+    def EsportivaBetLink(self, url: str) -> str:
+        afiliate_code = os.getenv("AFILIATE_CODE_ESPORTIVA_BET")
+        
+        codigo_aposta = url.split("shareCode=")[1]
+        
+        # https://go.aff.esportivabet.com/3qj2xv8m?shareCode=JNUT8BTXYW
+        link = f"https://go.aff.esportivabet.com/{afiliate_code}?shareCode={codigo_aposta}"
+        
+        return link
