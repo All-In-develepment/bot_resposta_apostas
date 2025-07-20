@@ -66,3 +66,12 @@ class BetLink:
         # https://go.aff.esportivabet.com/3qj2xv8m?shareCode=JNUT8BTXYW
         link = f"https://go.aff.esportiva.bet/{afiliate_code}?shareCode={codigo_aposta}"
         return link
+
+    def JogoDeOuroLink(self, url: str) -> str:
+        afiliate_code = os.getenv("AFILIATE_CODE_JOGO_DE_OURO")
+
+        codigo_aposta = url.split("shareCode=")[1]
+        
+        # https://go.aff.jogodeouro.bet/puie9j8m?shareCode=JNUT8BTXYW
+        link = f"https://go.aff.jogodeouro.bet/{afiliate_code}?aposta={codigo_aposta}"
+        return link

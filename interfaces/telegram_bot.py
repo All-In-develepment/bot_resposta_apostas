@@ -64,6 +64,16 @@ class TelegramBot:
             # Gera aposta da EsportivaBet
             msg_replay = self.bet_link.EsportivaBetLink(user_message)
             await update.message.reply_text(f"{msg_replay}")
+        
+        if domain == "EsportivaBet":
+            # Gera aposta da EsportivaBet
+            msg_replay = self.bet_link.EsportivaBetLink(user_message)
+            await update.message.reply_text(f"{msg_replay}")
+
+        if domain == "JogoDeOuro":
+            # Gera aposta da JogoDeOuro
+            msg_replay = self.bet_link.JogoDeOuroLink(user_message)
+            await update.message.reply_text(f"{msg_replay}")
 
         # await update.message.reply_text(f"{domain}")
 
