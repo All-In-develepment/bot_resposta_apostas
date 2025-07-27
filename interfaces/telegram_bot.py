@@ -74,6 +74,11 @@ class TelegramBot:
             # Gera aposta da JogoDeOuro
             msg_replay = self.bet_link.JogoDeOuroLink(user_message)
             await update.message.reply_text(f"{msg_replay}")
+            
+        if domain == "Novibet":
+            # Gera aposta da Novibet
+            msg_replay = self.bet_link.NovibetLink(user_message)
+            await update.message.reply_text(f"{msg_replay}")
 
         # await update.message.reply_text(f"{domain}")
 

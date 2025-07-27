@@ -75,3 +75,9 @@ class BetLink:
         # https://go.aff.jogodeouro.bet/puie9j8m?shareCode=JNUT8BTXYW
         link = f"https://go.aff.jogodeouro.bet/{afiliate_code}?aposta={codigo_aposta}"
         return link
+    
+    def NovibetLink(self, url: str) -> str:
+        afiliate_code = os.getenv("AFILIATE_CODE_ALFABET")
+        
+        link = f"{afiliate_code}&redirect_url={url}"
+        return link

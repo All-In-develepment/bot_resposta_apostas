@@ -19,5 +19,8 @@ class IdentifyBetting:
         
         if "jogodeouro.bet.br" in url:
             return "JogoDeOuro"
+        
+        if "novibet.bet" in url:
+            return "Novibet"
 
         return "casa indefinida"
