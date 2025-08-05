@@ -35,7 +35,7 @@ class TelegramBot:
         
         if domain in ["EstrelaBet", "McGames", "SportingBet", "Lotogreen", "EsportivaBet", "JogoDeOuro", "Novibet"]:
             # Gera botões para escolher o canal de divulgação
-            options = ["TELEGRAM", "WHATSAPP", "INSTAGRAM"]
+            options = ["TELEGRAM", "WHATSAPP", "INSTAGRAM", "SEM UTM"]
             reply_markup = self.create_buttons(options)
             await update.message.reply_text("📢 Escolha o canal onde você irá divulgar:", reply_markup=reply_markup)
             
@@ -55,30 +55,38 @@ class TelegramBot:
             # Gera o link com base na opção e na mensagem original
             msg_replay = ""
             
+            # Para a opção "SEM UTM", passa None como selected_option
+            utm_option = None if selected_option == "SEM UTM" else selected_option
+            
             if domain == "EstrelaBet":
-                msg_replay = self.bet_link.EstrelaBetLink(user_message, selected_option)
+                msg_replay = self.bet_link.EstrelaBetLink(user_message, utm_option)
             elif domain == "McGames":
-                msg_replay = self.bet_link.McGamesLink(user_message, selected_option)
+                msg_replay = self.bet_link.McGamesLink(user_message, utm_option)
             elif domain == "SportingBet":
-                msg_replay = self.bet_link.SportingBetLink(user_message, selected_option)
+                msg_replay = self.bet_link.SportingBetLink(user_message, utm_option)
             elif domain == "Lotogreen":
-                msg_replay = self.bet_link.LotoGreenLink(user_message, selected_option)
+                msg_replay = self.bet_link.LotoGreenLink(user_message, utm_option)
             elif domain == "EsportivaBet":
-                msg_replay = self.bet_link.EsportivaBetLink(user_message, selected_option)
+                msg_replay = self.bet_link.EsportivaBetLink(user_message, utm_option)
             elif domain == "JogoDeOuro":
-                msg_replay = self.bet_link.JogoDeOuroLink(user_message, selected_option)
+                msg_replay = self.bet_link.JogoDeOuroLink(user_message, utm_option)
             elif domain == "Novibet":
-                msg_replay = self.bet_link.NovibetLink(user_message, selected_option)
+                msg_replay = self.bet_link.NovibetLink(user_message, utm_option)
             
             # Emoji para cada canal
             channel_emoji = {
                 "TELEGRAM": "📱",
                 "WHATSAPP": "💬", 
-                "INSTAGRAM": "📸"
+                "INSTAGRAM": "📸",
+                "SEM UTM": "🔗"
             }
             
             emoji = channel_emoji.get(selected_option, "🔗")
-            response_text = f"{emoji} Canal selecionado: {selected_option}\n🔗 Seu link com UTM:\n\n{msg_replay}"
+            
+            if selected_option == "SEM UTM":
+                response_text = f"{emoji} Link sem UTM gerado:\n\n{msg_replay}"
+            else:
+                response_text = f"{emoji} Canal selecionado: {selected_option}\n🔗 Seu link com UTM:\n\n{msg_replay}"
         else:
             response_text = f"Erro: Não foi possível processar sua solicitação. Tente enviar o link novamente."
 
