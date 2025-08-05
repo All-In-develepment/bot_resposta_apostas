@@ -32,55 +32,16 @@ class TelegramBot:
     async def handle_message(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         user_message = update.message.text.strip()
         domain = self.identify_betting.IdentifyBetting(user_message)
-        if domain == "EstrelaBet":
-            # Gera aposta da EstrelaBet
-            # Gera botões para escolher a plataforma
-            # options = ["INSTAGRAM / STORY", "INSTAGRAM / REELS", "TELEGRAM", "WHATSAPP", "TRAFEGO PAGO", "DISPARO", "YOUTUBE"]
-            # reply_markup = self.create_buttons(options)
-            # await update.message.reply_text("Choose an option:", reply_markup=reply_markup)
+        
+        if domain in ["EstrelaBet", "McGames", "SportingBet", "Lotogreen", "EsportivaBet", "JogoDeOuro", "Novibet"]:
+            # Gera botões para escolher o canal de divulgação
+            options = ["TELEGRAM", "WHATSAPP", "INSTAGRAM"]
+            reply_markup = self.create_buttons(options)
+            await update.message.reply_text("📢 Escolha o canal onde você irá divulgar:", reply_markup=reply_markup)
             
-            # Salva a mensagem original no contexto do usuário
-            # context.user_data["last_message"] = user_message
-            
-            msg_replay = self.bet_link.EstrelaBetLink(user_message)
-            await update.message.reply_text(f"{msg_replay}")
-        
-        if domain == "McGames":
-            # Gera aposta da McGames
-            msg_replay = self.bet_link.McGamesLink(user_message)
-            await update.message.reply_text(f"{msg_replay}")
-        
-        if domain == "SportingBet":
-            # Gera aposta da SportingBet
-            msg_replay = self.bet_link.SportingBetLink(user_message)
-            await update.message.reply_text(f"{msg_replay}")
-        
-        if domain == "Lotogreen":
-            # Gera aposta da Lotogreen
-            msg_replay = self.bet_link.LotoGreenLink(user_message)
-            await update.message.reply_text(f"{msg_replay}")
-        
-        if domain == "EsportivaBet":
-            # Gera aposta da EsportivaBet
-            msg_replay = self.bet_link.EsportivaBetLink(user_message)
-            await update.message.reply_text(f"{msg_replay}")
-        
-        if domain == "EsportivaBet":
-            # Gera aposta da EsportivaBet
-            msg_replay = self.bet_link.EsportivaBetLink(user_message)
-            await update.message.reply_text(f"{msg_replay}")
-
-        if domain == "JogoDeOuro":
-            # Gera aposta da JogoDeOuro
-            msg_replay = self.bet_link.JogoDeOuroLink(user_message)
-            await update.message.reply_text(f"{msg_replay}")
-            
-        if domain == "Novibet":
-            # Gera aposta da Novibet
-            msg_replay = self.bet_link.NovibetLink(user_message)
-            await update.message.reply_text(f"{msg_replay}")
-
-        # await update.message.reply_text(f"{domain}")
+            # Salva a mensagem original e o domínio no contexto do usuário
+            context.user_data["last_message"] = user_message
+            context.user_data["domain"] = domain
 
     async def handle_button_click(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         query = update.callback_query
@@ -88,12 +49,37 @@ class TelegramBot:
 
         selected_option = query.data  # Obtém a opção escolhida
         user_message = context.user_data.get("last_message", "")
+        domain = context.user_data.get("domain", "")
 
-        if user_message:
+        if user_message and domain:
             # Gera o link com base na opção e na mensagem original
-            msg_replay = self.bet_link.EstrelaBetLink(user_message, selected_option)
-            response_text = f"Você escolheu: {selected_option}\nAqui está seu link: {msg_replay}"
+            msg_replay = ""
+            
+            if domain == "EstrelaBet":
+                msg_replay = self.bet_link.EstrelaBetLink(user_message, selected_option)
+            elif domain == "McGames":
+                msg_replay = self.bet_link.McGamesLink(user_message, selected_option)
+            elif domain == "SportingBet":
+                msg_replay = self.bet_link.SportingBetLink(user_message, selected_option)
+            elif domain == "Lotogreen":
+                msg_replay = self.bet_link.LotoGreenLink(user_message, selected_option)
+            elif domain == "EsportivaBet":
+                msg_replay = self.bet_link.EsportivaBetLink(user_message, selected_option)
+            elif domain == "JogoDeOuro":
+                msg_replay = self.bet_link.JogoDeOuroLink(user_message, selected_option)
+            elif domain == "Novibet":
+                msg_replay = self.bet_link.NovibetLink(user_message, selected_option)
+            
+            # Emoji para cada canal
+            channel_emoji = {
+                "TELEGRAM": "📱",
+                "WHATSAPP": "💬", 
+                "INSTAGRAM": "📸"
+            }
+            
+            emoji = channel_emoji.get(selected_option, "🔗")
+            response_text = f"{emoji} Canal selecionado: {selected_option}\n🔗 Seu link com UTM:\n\n{msg_replay}"
         else:
-            response_text = f"Você escolheu: {selected_option}"
+            response_text = f"Erro: Não foi possível processar sua solicitação. Tente enviar o link novamente."
 
         await query.message.reply_text(response_text)
