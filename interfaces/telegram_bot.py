@@ -35,7 +35,7 @@ class TelegramBot:
         
         if domain in ["EstrelaBet", "McGames", "SportingBet", "Lotogreen", "EsportivaBet", "JogoDeOuro", "Novibet"]:
             # Gera botões para escolher o canal de divulgação
-            options = ["TELEGRAM", "WHATSAPP", "INSTAGRAM", "SEM UTM"]
+            options = ["TELEGRAM", "WHATSAPP", "INSTAGRAM", "BINGO", "TRAFEGO PAGO", "SEM UTM"]
             reply_markup = self.create_buttons(options)
             await update.message.reply_text("📢 Escolha o canal onde você irá divulgar:", reply_markup=reply_markup)
             
@@ -78,6 +78,8 @@ class TelegramBot:
                 "TELEGRAM": "📱",
                 "WHATSAPP": "💬", 
                 "INSTAGRAM": "📸",
+                "BINGO": "🎰",
+                "TRAFEGO PAGO": "💰",
                 "SEM UTM": "🔗"
             }
             

@@ -17,6 +17,10 @@ class BetLink:
                 link = f"https://go.aff.estrelabetpartners.com/{afiliate_code}?utm_source=whatsapp&utm_medium=social&utm_campaign=apostas&aposta={codigo}"
             elif selected_option == "INSTAGRAM":
                 link = f"https://go.aff.estrelabetpartners.com/{afiliate_code}?utm_source=instagram&utm_medium=social&utm_campaign=apostas&aposta={codigo}"
+            elif selected_option == "BINGO":
+                link = f"https://go.aff.estrelabetpartners.com/{afiliate_code}?utm_source=bingo&utm_medium=game&utm_campaign=apostas&aposta={codigo}"
+            elif selected_option == "TRAFEGO PAGO":
+                link = f"https://go.aff.estrelabetpartners.com/{afiliate_code}?utm_source=paid_traffic&utm_medium=ads&utm_campaign=apostas&aposta={codigo}"
             else:
                 link = f"https://go.aff.estrelabetpartners.com/{afiliate_code}?&aposta={codigo}"
         else:
@@ -35,6 +39,10 @@ class BetLink:
                 link = f"https://go.aff.mcgames.bet/{afiliate_code}?utm_source=whatsapp&utm_medium=social&utm_campaign=apostas&shareCode={codigo_aposta}&home=1"
             elif selected_option == "INSTAGRAM":
                 link = f"https://go.aff.mcgames.bet/{afiliate_code}?utm_source=instagram&utm_medium=social&utm_campaign=apostas&shareCode={codigo_aposta}&home=1"
+            elif selected_option == "BINGO":
+                link = f"https://go.aff.mcgames.bet/{afiliate_code}?utm_source=bingo&utm_medium=game&utm_campaign=apostas&shareCode={codigo_aposta}&home=1"
+            elif selected_option == "TRAFEGO PAGO":
+                link = f"https://go.aff.mcgames.bet/{afiliate_code}?utm_source=paid_traffic&utm_medium=ads&utm_campaign=apostas&shareCode={codigo_aposta}&home=1"
             else:
                 link = f"https://go.aff.mcgames.bet/{afiliate_code}?shareCode={codigo_aposta}&home=1"
         else:
@@ -58,6 +66,10 @@ class BetLink:
                 return f"{final_url['redirectedUrl']}&wm={afiliate_code}&utm_source=whatsapp&utm_medium=social&utm_campaign=apostas"
             elif selected_option == "INSTAGRAM":
                 return f"{final_url['redirectedUrl']}&wm={afiliate_code}&utm_source=instagram&utm_medium=social&utm_campaign=apostas"
+            elif selected_option == "BINGO":
+                return f"{final_url['redirectedUrl']}&wm={afiliate_code}&utm_source=bingo&utm_medium=game&utm_campaign=apostas"
+            elif selected_option == "TRAFEGO PAGO":
+                return f"{final_url['redirectedUrl']}&wm={afiliate_code}&utm_source=paid_traffic&utm_medium=ads&utm_campaign=apostas"
             else:
                 return f"{final_url['redirectedUrl']}&wm={afiliate_code}"
         else:
@@ -74,6 +86,10 @@ class BetLink:
                 link = f"https://go.aff.lotogreen.com/{afiliate_code}?utm_source=whatsapp&utm_medium=social&utm_campaign=apostas&shareCode={codigo_aposta}"
             elif selected_option == "INSTAGRAM":
                 link = f"https://go.aff.lotogreen.com/{afiliate_code}?utm_source=instagram&utm_medium=social&utm_campaign=apostas&shareCode={codigo_aposta}"
+            elif selected_option == "BINGO":
+                link = f"https://go.aff.lotogreen.com/{afiliate_code}?utm_source=bingo&utm_medium=game&utm_campaign=apostas&shareCode={codigo_aposta}"
+            elif selected_option == "TRAFEGO PAGO":
+                link = f"https://go.aff.lotogreen.com/{afiliate_code}?utm_source=paid_traffic&utm_medium=ads&utm_campaign=apostas&shareCode={codigo_aposta}"
             else:
                 link = f"https://go.aff.lotogreen.com/{afiliate_code}?shareCode={codigo_aposta}"
         else:
@@ -92,6 +108,10 @@ class BetLink:
                 link = f"https://go.aff.esportiva.bet/{afiliate_code}?utm_source=whatsapp&utm_medium=social&utm_campaign=apostas&shareCode={codigo_aposta}"
             elif selected_option == "INSTAGRAM":
                 link = f"https://go.aff.esportiva.bet/{afiliate_code}?utm_source=instagram&utm_medium=social&utm_campaign=apostas&shareCode={codigo_aposta}"
+            elif selected_option == "BINGO":
+                link = f"https://go.aff.esportiva.bet/{afiliate_code}?utm_source=bingo&utm_medium=game&utm_campaign=apostas&shareCode={codigo_aposta}"
+            elif selected_option == "TRAFEGO PAGO":
+                link = f"https://go.aff.esportiva.bet/{afiliate_code}?utm_source=paid_traffic&utm_medium=ads&utm_campaign=apostas&shareCode={codigo_aposta}"
             else:
                 link = f"https://go.aff.esportiva.bet/{afiliate_code}?shareCode={codigo_aposta}"
         else:
@@ -110,6 +130,10 @@ class BetLink:
                 link = f"https://go.aff.jogodeouro.bet/{afiliate_code}?utm_source=whatsapp&utm_medium=social&utm_campaign=apostas&aposta={codigo_aposta}"
             elif selected_option == "INSTAGRAM":
                 link = f"https://go.aff.jogodeouro.bet/{afiliate_code}?utm_source=instagram&utm_medium=social&utm_campaign=apostas&aposta={codigo_aposta}"
+            elif selected_option == "BINGO":
+                link = f"https://go.aff.jogodeouro.bet/{afiliate_code}?utm_source=bingo&utm_medium=game&utm_campaign=apostas&aposta={codigo_aposta}"
+            elif selected_option == "TRAFEGO PAGO":
+                link = f"https://go.aff.jogodeouro.bet/{afiliate_code}?utm_source=paid_traffic&utm_medium=ads&utm_campaign=apostas&aposta={codigo_aposta}"
             else:
                 link = f"https://go.aff.jogodeouro.bet/{afiliate_code}?aposta={codigo_aposta}"
         else:
@@ -127,6 +151,10 @@ class BetLink:
                 link = f"{afiliate_code}&utm_source=whatsapp&utm_medium=social&utm_campaign=apostas&redirect_url={url}"
             elif selected_option == "INSTAGRAM":
                 link = f"{afiliate_code}&utm_source=instagram&utm_medium=social&utm_campaign=apostas&redirect_url={url}"
+            elif selected_option == "BINGO":
+                link = f"{afiliate_code}&utm_source=bingo&utm_medium=game&utm_campaign=apostas&redirect_url={url}"
+            elif selected_option == "TRAFEGO PAGO":
+                link = f"{afiliate_code}&utm_source=paid_traffic&utm_medium=ads&utm_campaign=apostas&redirect_url={url}"
             else:
                 link = f"{afiliate_code}&redirect_url={url}"
         else:
