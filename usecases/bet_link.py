@@ -8,7 +8,12 @@ load_dotenv()
 class BetLink:
     def EstrelaBetLink(self, url: str, selected_option: str = None) -> str:
         afiliate_code = os.getenv("AFILIATE_CODE_ESTRELA_BET")
-        codigo = url.split("aposta=")[1]
+        if "shareCode=" in url:
+            codigo = url.split("shareCode=")[1]
+        elif "aposta=" in url:
+            codigo = url.split("aposta=")[1]
+        else:
+            return "URL inválida: parâmetro 'shareCode' não encontrado."
 
         if selected_option:
             if selected_option == "TELEGRAM":
